@@ -23,5 +23,6 @@
             <tr><td colspan="2" align="center"><input type="submit" value="ส่งข้อความ"></td></tr>
         </table>
     </form>
+    <a href="index.html">กลับไปหน้าหลัก</a>
 </body>
 </html>
