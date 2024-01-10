@@ -11,9 +11,13 @@
 </header>
 <body style="text-align: center;">
     <?php
-    
-    echo "ต้องการดูกระทู้หมายเลข $_GET[id]";
-
+    $id = $_GET['id']; 
+    echo "ต้องการดูกระทู้หมายเลข $id <br>";
+    if($id % 2 == 0){
+        echo "เป็นกระทู้หมายเลขคู่";
+    }else{
+        echo "เป็นกระทู้หมายเลขคี่";
+    }
     ?>
     <form action="verify.php" method="post">
         <table style="border: solid 2px black; width: auto;" align="center">
@@ -23,6 +27,6 @@
             <tr><td colspan="2" align="center"><input type="submit" value="ส่งข้อความ"></td></tr>
         </table>
     </form>
-    <a href="index.html">กลับไปหน้าหลัก</a>
+    <a href="index.php">กลับไปหน้าหลัก</a>
 </body>
 </html>

@@ -11,8 +11,16 @@
     <hr>
 </header>
 <body style="text-align: center;">
-    <h4>เข้าสู่ระบบ</h4>
-    Username = <?php echo $_POST["login"] ?><br>
-    <?php echo "Password = $_POST[password] <br>"?>
+    <?php
+    $login = $_POST["login"];
+    $password = $_POST["password"]; 
+        if($login == "admin" && $password =="ad1234"){
+            echo "ยินดีตอนรับ ADMIN";
+        }elseif($login == "member" && $password =="mem1234"){
+            echo "ยินดีตอนรับ MEMBER";
+        }else echo "ชื่อบัญชีหรือรหัสผ่านไม่ถูกต้อง";
+    ?><br>
+    <a href="index.php">กลับไปยังหน้าหลัก</a>
+
 </body>
 </html>
