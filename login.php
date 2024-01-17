@@ -1,3 +1,10 @@
+<?php 
+        session_start();
+        if(isset($_SESSION['id'])){
+            header("location:index.php");
+            die(); 
+        }
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +17,8 @@
         <h1>Wasin Budprom</h1><hr>
     </header>
 <body>
+    
+
     <form action="verify.php" method="post">
         <table style="border: solid 2px black; width: 20%;" align="center">
             <tr style="background-color: #6cd2fe;"><td colspan="2">เข้าสู่ระบบ</td></tr>
@@ -19,7 +28,7 @@
         </table>
     </form>
     <div align="center">
-        <p>ถ้ายังไม่ได้สมัครสมาชิก <a href="register.html">กรุณากดสมัครสมาชิก</a> </p>
+        <p>ถ้ายังไม่ได้สมัครสมาชิก <a href="register.php">กรุณากดสมัครสมาชิก</a> </p>
     </div>
 </body>
 </html>
