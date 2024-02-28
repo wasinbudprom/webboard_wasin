@@ -55,11 +55,11 @@
                                         <label for="" class="form-check-label">ชาย</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="radio" name="gender" value="m" class="form-check-input" required>
+                                        <input type="radio" name="gender" value="f" class="form-check-input" required>
                                         <label for="" class="form-check-label">หญิง</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="radio" name="gender" value="m" class="form-check-input" required>
+                                        <input type="radio" name="gender" value="o" class="form-check-input" required>
                                         <label for="" class="form-check-label">อื่นๆ</label>
                                     </div>
                                 </div>
