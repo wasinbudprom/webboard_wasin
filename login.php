@@ -58,6 +58,7 @@ if (isset($_SESSION['id'])) {
                         </form>
                     </div>
                 </div>
+                <p>ถ้ายังไม่ได้<a href="register.php"> สมัครสมาชิก</a></p>
             </div>
             <div class="col-lg-4 col-md-3 col-sm-2 col-1"></div>
         </div>
