@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <nav class="navbar">
     <div class="rounded-3 container fs-5  p-3" style="background-color:#DCDCDC; ">
         <div class="">

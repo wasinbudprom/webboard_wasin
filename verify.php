@@ -4,39 +4,26 @@ if (isset($_SESSION['id'])) {
     header("location:index.php");
     die();
 }
-?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    $login = $_POST['login'];
+    $pwd = $_POST['password'];
+    $conn=new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
+    $sql="SELECT * FROM user where login='$login' and password=sha1('$pwd')";
+    $result=$conn->query($sql);
 
-<body>
-    <?php
-    $login = $_POST["login"];
-    $password = $_POST["password"];
-    if ($login == "admin" && $password == "ad1234") {
-        $_SESSION["username"] = "admin";
-        $_SESSION["role"] = "a";
-        $_SESSION["id"] = session_id();
-        header("Location: index.php");
+    if($result->rowCount()==1){
+        $data=$result->fetch(PDO::FETCH_ASSOC);
+        $_SESSION['username']=$data['login'];
+        $_SESSION['role']=$data['role'];
+        $_SESSION['user_id']=$data['id'];
+        $_SESSION['id']=session_id();
+        header("location:index.php");
         die();
-    } elseif ($login == "member" && $password == "mem1234") {
-        $_SESSION["username"] = "member";
-        $_SESSION["role"] = "m";
-        $_SESSION["id"] = session_id();
-        header("Location: index.php");
+    }else{
+        $_SESSION['error']="error";
+        header("location:login.php");
         die();
-    } else
-        $_SESSION["error"] = "error";
-        header("Location: login.php");
-        
-        die();
+    }
+    $conn=null;
+
     ?>
-
-</body>
-
-</html>

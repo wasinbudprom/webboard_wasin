@@ -34,9 +34,11 @@ if (isset($_SESSION['id'])) {
             <div class="col-lg-4 col-md-6 col-sm-8 col-10">
                 <?php
                 if (isset($_SESSION['error'])) { 
-                    
-                echo "<div class='alert alert-danger    '>ชื่อหรัสผ่านผิด</div>";
+                        
+                echo "<div class='alert alert-danger'>ชื่อหรัสผ่านผิด</div>";
                 unset($_SESSION['error']);
+                 }else{
+                        
                  }
                 ?>
                 <div class="card text-dark bg-light ">
