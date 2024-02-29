@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2024 at 10:47 AM
+-- Generation Time: Feb 29, 2024 at 02:14 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -31,6 +31,15 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'เรื่องทั่วไป'),
+(2, 'เรื่องเรียน'),
+(3, 'เรื่องกีฬา');
 
 -- --------------------------------------------------------
 
@@ -61,6 +70,13 @@ CREATE TABLE `post` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`id`, `title`, `content`, `post_date`, `cat_id`, `user_id`) VALUES
+(1, 'web', 'asd', '2024-02-28 16:46:55', 1, 8);
+
 -- --------------------------------------------------------
 
 --
@@ -76,6 +92,20 @@ CREATE TABLE `user` (
   `email` varchar(32) NOT NULL,
   `role` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `login`, `password`, `name`, `gender`, `email`, `role`) VALUES
+(1, 'test1', '123456', 'test 1', 'm', 'test@hotmail.com', 'm'),
+(2, 'test2', '123', 'test2', 'm', 'test2@hotmail.com', 'm'),
+(3, 'test3', '123', 'test3', 'm', 'test3@hotmail.com', 'm'),
+(4, 'test4', '123', 'test4 ', 'f', 'test4@hotmail.com', 'm'),
+(5, 'test5', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'test5123', 'o', 'test5@hotmail.com', 'm'),
+(6, 'qwe', '056eafe7cf52220de2df36845b8ed170c67e23e3', 'qwe', 'f', 'qwe@hotmail.com', 'm'),
+(7, 'wasin', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'wasin', 'f', 'wasin@hotmail.com', 'm'),
+(8, 'wasin1', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'asd', 'm', 'asd@hotmail.com', 'm');
 
 --
 -- Indexes for dumped tables
@@ -113,7 +143,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `comment`
@@ -125,13 +155,13 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
