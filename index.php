@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,35 +12,45 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script>
-        function myFunction(){
-            let r=confirm("แน่น๊ะ?");
-            return r;
-        }
-    </script>
+
 </head>
 
 <header>
     <h1 style="color: pink;">Wasin Budprom</h1>
-
 </header>
 
 <body class="container">
-    <?php @include('nav.php') ?>
+    
+    <?php @include('nav.php')?>
+    
     <div class="my-2 d-flex justify-content-between">
         <div>
             <lable>หมวดหมู่</lable>
             <span class="dropdown">
+                <?php 
+                    $conn=new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
+                    error_reporting(0);
+                    ini_set('display_errors', 0);
+                ?>
                 <button class="btn btn-white-50 btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    --ทั้งหมด--
+                        <?php
+                        if($_GET['id']){
+                        $sql="SELECT name FROM category WHERE id=$_GET[id]";
+                        foreach($conn->query($sql)as $row)
+                        echo "$row[name]";
+                        }else{
+                            echo "--ทั้งหมด--";
+                        }
+                        ?>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="Button2">
                     <?php
-                         $conn=new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
-                         $sql="SELECT * FROM category";
+                         
+                        $sql="SELECT * FROM category";
+                            echo "<li><a class='dropdown-item' href='index.php'>ทั้งหมด</a></li>";
                          foreach($conn->query($sql)as $row){
-                            echo "<li><a class='dropdown-item' href=''>$row[name]</a></li>";
+                            echo "<li><a class='dropdown-item' href='index.php?id=$row[id]' onclick='ses()'>$row[name]</a></li>";
                          }
                          $conn=null;
                     ?>
@@ -57,9 +66,18 @@
     <table class="table table-striped mt-4 ">
         <?php
         $conn=new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
-        $sql="SELECT t3.name,t1.title,t1.id,t2.login,t1.post_date FROM post as t1
-        INNER JOIN user as t2 ON (t1.user_id=t2.id)
-        INNER JOIN category as t3 ON (t1.cat_id=t3.id) ORDER BY t1.post_date DESC";
+
+        if($_GET['id']){
+            
+            $sql="SELECT t3.name,t1.title,t1.id,t2.login,t1.post_date FROM post as t1
+            INNER JOIN user as t2 ON (t1.user_id=t2.id)
+            INNER JOIN category as t3 ON (t1.cat_id=t3.id) WHERE t1.cat_id=$_GET[id] ORDER BY t1.post_date DESC" ;
+        }else{
+            
+            $sql="SELECT t3.name,t1.title,t1.id,t2.login,t1.post_date FROM post as t1
+            INNER JOIN user as t2 ON (t1.user_id=t2.id)
+            INNER JOIN category as t3 ON (t1.cat_id=t3.id) ORDER BY t1.post_date DESC" ;
+        }
         $result=$conn->query($sql);
         while($row=$result->fetch()){
             echo "<tr><td class='d-flex justify-content-between'>
@@ -73,6 +91,17 @@
         $conn=null;
         ?>
     </table>
+
+        <script>
+            function myFunction(){
+                let r=confirm("แน่น๊ะ?");
+                return r;
+            }
+            function ses(){
+               return $_SESSION['cat_id']="success";
+            }
+        </script>
+
 </body>
 
 </html>
