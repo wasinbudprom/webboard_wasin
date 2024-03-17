@@ -29,13 +29,12 @@
             <span class="dropdown">
                 <?php 
                     $conn=new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
-                    error_reporting(0);
-                    ini_set('display_errors', 0);
+                    
                 ?>
                 <button class="btn btn-white-50 btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                         <?php
-                        if($_GET['id']){
+                        if(isset($_GET['id'])){
                         $sql="SELECT name FROM category WHERE id=$_GET[id]";
                         foreach($conn->query($sql)as $row)
                         echo "$row[name]";
@@ -48,7 +47,7 @@
                     <?php
                          
                         $sql="SELECT * FROM category";
-                            echo "<li><a class='dropdown-item' href='index.php'>ทั้งหมด</a></li>";
+                            echo "<li><a class='dropdown-item' href='index.php'>--ทั้งหมด--</a></li>";
                          foreach($conn->query($sql)as $row){
                             echo "<li><a class='dropdown-item' href='index.php?id=$row[id]' onclick='ses()'>$row[name]</a></li>";
                          }
@@ -67,26 +66,39 @@
         <?php
         $conn=new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
 
-        if($_GET['id']){
-            
-            $sql="SELECT t3.name,t1.title,t1.id,t2.login,t1.post_date FROM post as t1
+        if(isset($_GET['id'])){
+            $sql="SELECT t3.name,t1.title,t1.id,t2.login,t1.post_date,t2.id as 'user_id' FROM post as t1
             INNER JOIN user as t2 ON (t1.user_id=t2.id)
-            INNER JOIN category as t3 ON (t1.cat_id=t3.id) WHERE t1.cat_id=$_GET[id] ORDER BY t1.post_date DESC" ;
+            INNER JOIN category as t3 ON (t1.cat_id=t3.id)
+            WHERE t1.cat_id=$_GET[id] 
+            ORDER BY t1.post_date DESC" ;
         }else{
-            
-            $sql="SELECT t3.name,t1.title,t1.id,t2.login,t1.post_date FROM post as t1
+            $sql="SELECT t3.name,t1.title,t1.id,t2.login,t1.post_date,t2.id as 'user_id' FROM post as t1
             INNER JOIN user as t2 ON (t1.user_id=t2.id)
-            INNER JOIN category as t3 ON (t1.cat_id=t3.id) ORDER BY t1.post_date DESC" ;
+            INNER JOIN category as t3 ON (t1.cat_id=t3.id) 
+            ORDER BY t1.post_date DESC" ;
         }
         $result=$conn->query($sql);
+        
         while($row=$result->fetch()){
-            echo "<tr><td class='d-flex justify-content-between'>
-            <div>[ $row[0] ]<a href=post.php?id=$row[2]
+            
+            echo "<tr><td class='d-flex'>
+            <div class='flex-grow-1'>[ $row[0] ]<a href=post.php?id=$row[2]
             style=text-decoration:none> $row[1]</a><br>$row[3] - $row[4]</div>";
-           if(isset($_SESSION['id'])&& $_SESSION['role']=='a'){
-            echo "<div class='me-2 align-self-center'><a href=delete.php?id=$row[2]
-            class='btn btn-danger btn-sm' onclick='return myFunction()'><i class='bi bi-trash'></i></a></div>";
-           }
+            if(isset($_SESSION['id'])){
+                if($_SESSION['user_id']==$row['user_id']){
+                    
+                    echo "<div class='me-2 align-self-center'><a href=''
+                    class='btn btn-warning btn-sm' onclick=''><i class='bi bi-pencil-fill'></i></a></div>";
+
+                    echo "<div class='me-2 align-self-center'><a href=delete.php?id=$row[2]
+                    class='btn btn-danger btn-sm' onclick='return myFunction()'><i class='bi bi-trash'></i></a></div>";
+                }
+                else if($_SESSION['role']=='a'){
+                    echo "<div class='me-2 align-self-center'><a href=delete.php?id=$row[2]
+                    class='btn btn-danger btn-sm' onclick='return myFunction()'><i class='bi bi-trash'></i></a></div>";
+                }
+            }
         }
         $conn=null;
         ?>
