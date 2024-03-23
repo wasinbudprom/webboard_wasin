@@ -47,7 +47,7 @@
                     <?php
                          
                         $sql="SELECT * FROM category";
-                            echo "<li><a class='dropdown-item' href='index.php'>--ทั้งหมด--</a></li>";
+                            echo "<li><a class='dropdown-item' href='index.php'> --ทั้งหมด-- </a></li>";
                          foreach($conn->query($sql)as $row){
                             echo "<li><a class='dropdown-item' href='index.php?id=$row[id]' onclick='ses()'>$row[name]</a></li>";
                          }
@@ -87,8 +87,7 @@
             style=text-decoration:none> $row[1]</a><br>$row[3] - $row[4]</div>";
             if(isset($_SESSION['id'])){
                 if($_SESSION['user_id']==$row['user_id']){
-                    
-                    echo "<div class='me-2 align-self-center'><a href=''
+                    echo "<div class='me-2 align-self-center'><a href='editpost.php?id=$row[2]'
                     class='btn btn-warning btn-sm' onclick=''><i class='bi bi-pencil-fill'></i></a></div>";
 
                     echo "<div class='me-2 align-self-center'><a href=delete.php?id=$row[2]

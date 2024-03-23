@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION['id']) && $_SESSION['role']=="a"){
+    if(isset($_SESSION['id'])){
         $conn=new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
         $id=$_GET['id'];
         $sql="DELETE FROM post WHERE id=$id";
