@@ -19,26 +19,31 @@
     <div class="container">
         <?php @include('nav.php') ?>
             <?php
-            $sql= "SELECT user_id FROM post WHERE post.id=$_GET[id]";
-            $conn=new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
-                foreach($conn->query($sql) as $row){
-                    if(!isset($_SESSION['id']) || $_SESSION['user_id']!=$row['user_id'] ){
-                        header("location:index.php");
-                        die();
-                    }
-                }
-
-                
-                      
+                $sql= "SELECT user_id FROM post WHERE post.id=$_GET[id]";
+                $conn=new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
+                    foreach($conn->query($sql) as $row){
+                        if(!isset($_SESSION['id']) || $_SESSION['user_id']!=$row['user_id'] ){
+                            header("location:index.php");
+                            die();
+                        }
+                    }   
             ?>
-            
         <div class="row mt-4">
             <div class="col-lg-3 col-md-2 col-sm-1"></div>
             <div class="col-lg-6 col-md-8 col-sm-10">
+                <?php
+                    if(isset($_SESSION['add_edit'])){
+                        if($_SESSION['add_edit']=="success"){
+                            echo "<div class='alert alert-success'>แก้ไขข้อมูลเรียบร้อย</div>";
+                        }else{
+                            echo "<div class='alert alert-danger'>ไม่สามารถแก้ไขข้อมูลได้</div>";
+                        }
+                        unset($_SESSION['add_edit']);
+                    }
+                ?>
                 <div class="card border-info">
                     <div class="card-header bg-info text-white">ตั้งกระทู้ใหม่</div>
                     <div class="card-body">
-                        
                         <form action="editpost_save.php" method="post">
                             <div class="row">
                                 <label for="" class="col-lg-3 col-form-label">หมวดหมู่:</label>

@@ -10,8 +10,15 @@
     
     $sql ="UPDATE post SET post.cat_id = '$cate',post.title = '$top', post.content = '$com' WHERE post.id = $id";
     
-    $conn->exec($sql);
+    $result = $conn->exec($sql);
+
+    if($result){
+        $_SESSION['add_edit']="success";
+    }else{
+        $_SESSION['add_edit']="error";
+    }
+
+    header("location:editpost.php?id=$id");
     $conn=null;
-    header("location:index.php");
-    die();
+    
 ?>
