@@ -55,7 +55,7 @@
                 
             </div>
             <div class="col-lg-6 col-sm-8 align-self-center " >
-                <table class="table table-striped mt-4 " >
+                <table class="table table-striped mt-4 ms-5" >
                     <tr> <th>ลำดับ</th> <th>หมวดหมู่</th> <th>จัดการ</th> </tr>
 
                     <?php 
